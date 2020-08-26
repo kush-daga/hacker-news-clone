@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import actions from "store/actions";
 import { darkTheme, lightTheme } from "styles/theme.js";
 import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroll-component";
+import TopStories from "../TopStories";
+import { Wrapper } from "./styles";
 function App() {
   const theme = useSelector((state) => state.app.theme);
   const dispatch = useDispatch();
@@ -14,14 +17,19 @@ function App() {
   }, [theme]);
   return (
     <ThemeProvider theme={theme === "lightTheme" ? lightTheme : darkTheme}>
-      <button
-        onClick={() => {
-          dispatch(actions.appActions.setTheme());
-        }}
-      >
-        Change theme
-      </button>
-      <Text>Hello WOrlld</Text>
+      <nav>
+        <button
+          onClick={() => {
+            dispatch(actions.appActions.setTheme());
+          }}
+        >
+          Change theme
+        </button>
+        <Text>Hello WOrlld</Text>
+      </nav>
+      <Wrapper>
+        <TopStories />
+      </Wrapper>
     </ThemeProvider>
   );
 }
