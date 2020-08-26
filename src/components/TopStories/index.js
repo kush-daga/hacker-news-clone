@@ -5,6 +5,8 @@ function TopStories() {
   return (
     <Wrapper>
       <StoryItem />
+      <StoryItem />
+      <StoryItem />
     </Wrapper>
   );
 }
