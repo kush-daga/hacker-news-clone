@@ -1,6 +1,6 @@
 import axios from "axios";
 //Code from a github repo to initialize axios API
-const API_ROOT = process.env.URL || "http://localhost:3000/";
+const API_ROOT = "http://localhost:3000/";
 const TIMEOUT = 20000;
 const HEADERS = {
   "Content-Type": "application/json",
