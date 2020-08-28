@@ -6,11 +6,11 @@ import { darkTheme, lightTheme } from "styles/theme.js";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import TopStories from "../TopStories";
-import { Wrapper } from "./styles";
+import { Wrapper, Nav, Text } from "./styles";
 import Loader from "../Loader";
+import { FaLightbulb } from "react-icons/fa";
 function App() {
   const theme = useSelector((state) => state.app.theme);
-
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,16 +31,16 @@ function App() {
   };
   return (
     <ThemeProvider theme={theme === "lightTheme" ? lightTheme : darkTheme}>
-      <nav>
+      <Nav>
+        <Text>Daga News</Text>
         <button
           onClick={() => {
             dispatch(actions.appActions.setTheme());
           }}
         >
-          Change theme
+          <FaLightbulb />
         </button>
-        <Text>Hello WOrlld</Text>
-      </nav>
+      </Nav>
       <Wrapper>
         <InfiniteScroll
           dataLength={posts.posts.length}
@@ -56,7 +56,3 @@ function App() {
 }
 
 export default App;
-
-const Text = styled.h1`
-  color: ${({ theme }) => theme.text};
-`;
