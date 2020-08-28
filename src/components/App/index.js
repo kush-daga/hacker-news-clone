@@ -9,8 +9,10 @@ import TopStories from "../TopStories";
 import { Wrapper } from "./styles";
 function App() {
   const theme = useSelector((state) => state.app.theme);
+  const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(actions.postActions.fetchPostIds()); //Just checking if it works!
     theme === "lightTheme"
       ? (document.body.style = `background-color: ${lightTheme.background};`)
       : (document.body.style = `background-color: ${darkTheme.background};`);
@@ -28,6 +30,7 @@ function App() {
         <Text>Hello WOrlld</Text>
       </nav>
       <Wrapper>
+        {posts && posts[0] ? posts[0].by : ""}
         <TopStories />
       </Wrapper>
     </ThemeProvider>

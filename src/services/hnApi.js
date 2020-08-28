@@ -17,13 +17,13 @@ const getPageIndexes = (limit, page = 0) => ({
 const getIdInPage = ({ begin, end, items }) => items.slice(begin, end); //Get begin and end index of a page
 console.log(apiClient);
 //HN API FUNCTIONS
-hnApi.getTopStoriesByIds = () => apiClient.get(`/topstories${PRETTY_PRINT}`); //Get the top stories
-hnApi.getSingleStory = (id) => apiClient.get(`/item/${id}${PRETTY_PRINT}`); //Get data of a single story
-hnApi.getStoriesOnAPage = (ids, page) => {
+hnApi.getTopPostsByIds = () => apiClient.get(`/topstories${PRETTY_PRINT}`); //Get the top stories
+hnApi.getSinglePost = (id) => apiClient.get(`/item/${id}${PRETTY_PRINT}`); //Get data of a single story
+hnApi.getPostsOnAPage = (ids, page) => {
   const { begin, end } = getPageIndexes(PAGE_LIMIT, page);
   const idsToFetch = getIdInPage({ begin, end, items: ids });
-  const unresolvedPromises = idsToFetch.map((id) => hnApi.getSingleStory(id));
+  const unresolvedPromises = idsToFetch.map((id) => hnApi.getSinglePost(id));
   return Promise.all(unresolvedPromises);
-}; //Get stories of one page
+}; //Get posts of one page
 
 export default hnApi;
