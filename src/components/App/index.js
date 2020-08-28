@@ -7,6 +7,7 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import TopStories from "../TopStories";
 import { Wrapper } from "./styles";
+import Loader from "../Loader";
 function App() {
   const theme = useSelector((state) => state.app.theme);
 
@@ -45,7 +46,7 @@ function App() {
           dataLength={posts.posts.length}
           next={fetchMorePosts}
           hasMore={posts.postIds.length > posts.posts.length}
-          loader={<h1>Loading</h1>}
+          loader={<Loader />}
         >
           <TopStories posts={posts.posts} loading={posts.isFetching} />
         </InfiniteScroll>
