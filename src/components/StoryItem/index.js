@@ -8,24 +8,27 @@ import {
   Desc,
   CommentLink,
 } from "./styles";
-function StoryItem() {
+import getHost from "../../utils/getHost";
+function StoryItem({ post }) {
+  const host = getHost(post.url);
   return (
     <Item>
-      <LinkStory>
+      {console.log(post)}
+      <LinkStory href={post.url}>
         <Title>
-          Sample Title <LinkTitle>(google.com)</LinkTitle>
+          {post.title} <LinkTitle>({host})</LinkTitle>
         </Title>
         <Time>1 hour ago</Time>
       </LinkStory>
       <Desc>
         <div>
-          100 points by{" "}
+          {post.score} points by{" "}
           <CommentLink
-            href="#"
+            href={`https://news.ycombinator.com/user?id=${post.by}`}
             rel="noopener noreferrer nofollow"
             target="_blank"
           >
-            User 1{" "}
+            {post.by}{" "}
           </CommentLink>
         </div>
         <CommentLink
@@ -33,7 +36,7 @@ function StoryItem() {
           rel="noopener noreferrer nofollow"
           target="_blank"
         >
-          100 comments
+          {post.kids ? post.kids.length : 0} comments
         </CommentLink>
       </Desc>
     </Item>

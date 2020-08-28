@@ -19,7 +19,7 @@ export const Title = styled.h3`
   letter-spacing: 0.4px;
 `;
 
-export const LinkTitle = styled.span`
+export const LinkTitle = styled.a`
   color: ${({ theme }) => theme.textSecondary};
   font-size: 12px;
 `;
@@ -36,6 +36,7 @@ export const LinkStory = styled.a`
 `;
 export const Time = styled.div`
   font-size: 14px;
+  color: ${({ theme }) => theme.text};
 `;
 export const Desc = styled.div`
   font-size: 14px;

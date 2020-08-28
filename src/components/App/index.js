@@ -9,14 +9,25 @@ import TopStories from "../TopStories";
 import { Wrapper } from "./styles";
 function App() {
   const theme = useSelector((state) => state.app.theme);
-  const posts = useSelector((state) => state.posts.posts);
+
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.postActions.fetchPostIds()); //Just checking if it works!
     theme === "lightTheme"
       ? (document.body.style = `background-color: ${lightTheme.background};`)
       : (document.body.style = `background-color: ${darkTheme.background};`);
   }, [theme]);
+  //Get Posts for first page
+  useEffect(() => {
+    dispatch(actions.postActions.fetchPostIds());
+  }, [dispatch]);
+
+  const fetchMorePosts = () => {
+    const { postIds, page, isFetching } = posts;
+    console.log(posts.posts);
+    if (!isFetching)
+      dispatch(actions.postActions.fetchPosts({ postIds, page }));
+  };
   return (
     <ThemeProvider theme={theme === "lightTheme" ? lightTheme : darkTheme}>
       <nav>
@@ -30,8 +41,14 @@ function App() {
         <Text>Hello WOrlld</Text>
       </nav>
       <Wrapper>
-        {posts && posts[0] ? posts[0].by : ""}
-        <TopStories />
+        <InfiniteScroll
+          dataLength={posts.posts.length}
+          next={fetchMorePosts}
+          hasMore={posts.postIds.length > posts.posts.length}
+          loader={<h1>Loading</h1>}
+        >
+          <TopStories posts={posts.posts} loading={posts.isFetching} />
+        </InfiniteScroll>
       </Wrapper>
     </ThemeProvider>
   );

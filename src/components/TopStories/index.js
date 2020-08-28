@@ -1,13 +1,13 @@
 import React from "react";
 import { Wrapper } from "./styles";
 import StoryItem from "components/StoryItem";
-import hnApi from "services/hnApi.js";
-function TopStories() {
+
+function TopStories({ posts, loading }) {
   return (
     <Wrapper>
-      <StoryItem />
-      <StoryItem />
-      <StoryItem />
+      {posts.map((post) => {
+        return <StoryItem key={post.id} post={post} />;
+      })}
     </Wrapper>
   );
 }
